@@ -4,11 +4,12 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Menu, X, Sprout, ShoppingCart, User, Wallet, Bell } from "lucide-react"
+import { Menu, X, Sprout, ShoppingCart, User, Wallet, Bell, Shield } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isWalletConnected, setIsWalletConnected] = useState(false)
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
@@ -20,6 +21,9 @@ export function Header() {
               <Sprout className="h-5 w-5 text-white" />
             </div>
             <span className="text-xl font-bold text-green-800 font-caveat">Kisan Booth</span>
+            <Badge variant="secondary" className="bg-blue-100 text-blue-800 text-xs">
+              Web3
+            </Badge>
           </Link>
 
           {/* Desktop Navigation */}
@@ -32,6 +36,10 @@ export function Header() {
             </Link>
             <Link href="/fund-farmer" className="text-gray-700 hover:text-green-600 transition-colors">
               Fund a Farmer
+            </Link>
+            <Link href="/web3" className="text-gray-700 hover:text-green-600 transition-colors flex items-center">
+              Web3 Features
+              <Shield className="h-3 w-3 ml-1 text-blue-600" />
             </Link>
             <Link href="/learn" className="text-gray-700 hover:text-green-600 transition-colors">
               Learn
@@ -49,8 +57,19 @@ export function Header() {
                 3
               </Badge>
             </Button>
-            <Button variant="ghost" size="sm">
+
+            {/* Wallet Connection Status */}
+            <Button
+              variant={isWalletConnected ? "secondary" : "ghost"}
+              size="sm"
+              className={isWalletConnected ? "bg-green-100 text-green-800" : ""}
+            >
               <Wallet className="h-4 w-4" />
+              {isWalletConnected && (
+                <Badge variant="secondary" className="ml-1 bg-green-200 text-green-800">
+                  Connected
+                </Badge>
+              )}
             </Button>
 
             <DropdownMenu>
@@ -65,6 +84,9 @@ export function Header() {
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="/farmer-panel">Farmer Panel</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/web3">Web3 Features</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>Profile Settings</DropdownMenuItem>
                 <DropdownMenuItem>Sign Out</DropdownMenuItem>
@@ -92,6 +114,10 @@ export function Header() {
               </Link>
               <Link href="/fund-farmer" className="text-gray-700 hover:text-green-600">
                 Fund a Farmer
+              </Link>
+              <Link href="/web3" className="text-gray-700 hover:text-green-600 flex items-center">
+                Web3 Features
+                <Shield className="h-3 w-3 ml-1 text-blue-600" />
               </Link>
               <Link href="/learn" className="text-gray-700 hover:text-green-600">
                 Learn
