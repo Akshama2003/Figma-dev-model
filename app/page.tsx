@@ -1,11 +1,17 @@
-"use client"
+import { Hero } from "@/components/hero"
+import { FeaturedCrops } from "@/components/featured-crops"
+import { HowItWorks } from "@/components/how-it-works"
+import { SuccessStories } from "@/components/success-stories"
+import { Stats } from "@/components/stats"
 
-import { DevModeInterface } from "@/components/dev-mode-interface"
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="h-screen w-full">
-      <DevModeInterface />
+    <div className="min-h-screen">
+      <Hero />
+      <Stats />
+      <HowItWorks />
+      <FeaturedCrops />
+      <SuccessStories />
     </div>
   )
 }
